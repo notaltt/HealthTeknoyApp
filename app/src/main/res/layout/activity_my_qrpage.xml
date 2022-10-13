@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_qr"
+    tools:context=".MyQR.MyQRPage">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:layout_editor_absoluteX="-183dp"
+        tools:layout_editor_absoluteY="0dp">
+
+        <RelativeLayout
+            android:layout_width="369dp"
+            android:layout_height="602dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginRight="20dp"
+            android:padding="10dp">
+
+            <TextView
+                android:id="@+id/viewTravel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="33dp"
+                android:text="TRAVEL UPDATE"
+                android:textColor="#632728"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/viewLastWeek"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/viewTravel"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="18dp"
+                android:text="TRAVEL WITHIN THE LAST 2 WEEKS? (OUTSIDE CEBU) (YES OR NO)"
+                android:textColor="#000000"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/textYesNo"
+                android:layout_width="65dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/viewLastWeek"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/edit2"
+                android:inputType="textEmailAddress" />
+
+
+            <TextView
+                android:id="@+id/viewSpecify"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/textYesNo"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:text="SPECIFY PLACE OF TRAVEL"
+                android:textColor="#000000"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/textSpecify"
+                android:layout_width="280dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/viewSpecify"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/edit2"
+                android:inputType="textEmailAddress" />
+
+            <TextView
+                android:id="@+id/viewTemperature"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/textSpecify"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:text="TEMPERATURE (CELSIUS)"
+                android:textColor="#000000"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/textTemperature"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/viewTemperature"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/edit2"
+                android:inputType="textEmailAddress" />
+
+            <TextView
+                android:id="@+id/viewSymptoms"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/textTemperature"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="15dp"
+                android:text="SYMPTOMS CHECK"
+                android:textColor="#632728"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/viewExperience"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/viewSymptoms"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="12dp"
+                android:text="ARE YOU CURRENTLY EXPERIENCING ANY OF THE FOLLOWING? (PLEASE CHECK)"
+                android:textColor="#000000"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+            <ListView
+                android:id="@+id/listview_symptoms"
+                android:layout_width="wrap_content"
+                android:layout_height="120dp"
+                android:layout_below="@id/viewExperience"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="18dp"
+                android:choiceMode="multipleChoice" />
+
+            <TextView
+                android:id="@+id/viewRecent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/listview_symptoms"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginRight="12dp"
+                android:text="RECENT EXPOSURE?"
+                android:textColor="#000000"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+            <ListView
+                android:id="@+id/listview_exposed"
+                android:layout_width="wrap_content"
+                android:layout_height="120dp"
+                android:layout_below="@id/viewRecent"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="18dp"
+                android:choiceMode="multipleChoice" />
+
+        </RelativeLayout>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/generateButton"
+            android:layout_width="166dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="10dp"
+            android:layout_below="@id/listview_symptoms"
+            android:layout_gravity="center"
+            android:background="@drawable/button_background2"
+            android:text="GENERATE BARCODE" />
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
