@@ -6,7 +6,6 @@ import androidx.appcompat.widget.AppCompatButton;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
@@ -14,10 +13,6 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.teknoyhealthapp.History.HistoryPage;
-import com.example.teknoyhealthapp.LoginForm;
-import com.example.teknoyhealthapp.MainActivity;
-import com.example.teknoyhealthapp.MyAccount.MyAccountPage;
 import com.example.teknoyhealthapp.R;
 import com.example.teknoyhealthapp.User;
 import com.google.firebase.database.DataSnapshot;
@@ -27,6 +22,12 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
+import java.util.Random;
+
 public class MyQRPage extends AppCompatActivity {
 
     private EditText textYesNo, textSpecify, textTemperature;
@@ -35,8 +36,12 @@ public class MyQRPage extends AppCompatActivity {
     private ArrayAdapter<String> adapter;
     private ArrayAdapter<String> adapter2;
     private FirebaseDatabase rootNode;
-    private DatabaseReference reference;
+    private DatabaseReference reference, reference2;
+    private String currentDate;
+    private Calendar calendar;
+    private SimpleDateFormat simpleDateFormat;
     private int i;
+    private long maxId;
     String[] arraySymptoms = {"FEVER", "COUGH", "SNEEZE", "CHILLS", "COLDS", "DIFFICULTY BREATHING",
             "MUSCLE PAIN", " SORE THROAT", "LOSS OF SENSE OF TASTE/SMELL", "HEADACHE", "NONE"};
     String[] arrayExposed = {"EXPOSED TO COVID19 POSITIVE", "FAMILY MEMBER/S HAS SYMPTOMS BUT NOT CONFIRMED", "NONE"};
@@ -107,17 +112,22 @@ public class MyQRPage extends AppCompatActivity {
 
                         reference.child(usernameCurrent).setValue(useR);
 
-                        makeIntent();
-                        /*String finalSpecify = specify;
-                        new Handler().postDelayed(new Runnable() {
-                            @Override
-                            public void run() {
-                                User useR = new User(nameCurrent, genderCurrent, addressCurrent, emailCurrent, passwordCurrent, phoneCurrent, "",
-                                        temperature, usernameCurrent, finalSpecify, "", "");
+                        Random random = new Random();
+                        int randomInt = random.nextInt(1000);
 
-                                reference.child(usernameCurrent).setValue(useR);
-                            }
-                        },20000);*/
+                        reference2 = rootNode.getReference("Dates");
+
+                        calendar = Calendar.getInstance();
+                        simpleDateFormat = new SimpleDateFormat("EEE, MMMM d, yyyy");
+                        currentDate = simpleDateFormat.format(calendar.getTime());
+
+                        String stringChar = String.valueOf(randomInt);
+
+                        User user2 = new User(currentDate);
+
+                        reference2.child(usernameCurrent).child(currentDate).setValue(user2);
+                        makeIntent();
+
                     }else{
                         Toast.makeText(getApplicationContext(), "SORRY YOU CAN'T GENERATE A BARCODE. PLEASE CONSULT A DOCTOR.", Toast.LENGTH_SHORT).show();
                     }

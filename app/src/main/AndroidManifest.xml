@@ -3,6 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.teknoyhealthapp">
 
+    <uses-permission android:name="android.permission.INTERNET"/>
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -23,7 +25,7 @@
             android:name=".MyAccount.MyAccountPage"
             android:exported="false" />
         <activity
-            android:name=".History.HistoryPage"
+            android:name=".Update.UpdatePage"
             android:exported="false" />
         <activity
             android:name=".Calendar.CalendarPage"

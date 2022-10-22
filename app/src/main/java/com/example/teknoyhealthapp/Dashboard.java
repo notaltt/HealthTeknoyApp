@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import com.example.teknoyhealthapp.About.AboutPage;
 import com.example.teknoyhealthapp.Calendar.CalendarPage;
-import com.example.teknoyhealthapp.History.HistoryPage;
+import com.example.teknoyhealthapp.Update.UpdatePage;
 import com.example.teknoyhealthapp.MyAccount.MyAccountPage;
 import com.example.teknoyhealthapp.MyQR.BarcodePage;
 import com.example.teknoyhealthapp.MyQR.MyQRPage;
@@ -42,97 +42,26 @@ public class Dashboard extends AppCompatActivity {
     }
 
     public void openCalendar(View view) {
-        Intent intent = new Intent(this, CalendarPage.class);
-        startActivity(intent);
+        intentUser(CalendarPage.class);
     }
 
     public void openQR(View view) {
-        Intent intent = getIntent();
-        String emailCurrent = intent.getStringExtra("username");
-        reference = FirebaseDatabase.getInstance("https://teknoyhealthapp-default-rtdb.asia-southeast1.firebasedatabase.app").getReference("User");
-        Query checkUser = reference.orderByChild("username").equalTo(emailCurrent);
-
-        checkUser.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if(snapshot.exists()){
-                    String namedDB = snapshot.child(emailCurrent).child("fullName").getValue(String.class);
-                    String emailDB = snapshot.child(emailCurrent).child("email").getValue(String.class);
-                    String phoneDB = snapshot.child(emailCurrent).child("phoneNumber").getValue(String.class);
-                    String usernameDB = snapshot.child(emailCurrent).child("username").getValue(String.class);
-                    String passwordDB = snapshot.child(emailCurrent).child("password").getValue(String.class);
-                    String addressDB = snapshot.child(emailCurrent).child("address").getValue(String.class);
-                    String symptomsDB = snapshot.child(emailCurrent).child("symptoms").getValue(String.class);
-                    String recentDB = snapshot.child(emailCurrent).child("recentExposure").getValue(String.class);
-
-                    Intent intent;
-                    if(symptomsDB.equals("YES") && recentDB.equals("YES")){
-                        intent = new Intent(getApplicationContext(), BarcodePage.class);
-                    }else{
-                        intent = new Intent(getApplicationContext(), MyQRPage.class);
-                    }
-                    intent.putExtra("fullName", namedDB);
-                    intent.putExtra("email", emailDB);
-                    intent.putExtra("phoneNumber", phoneDB);
-                    intent.putExtra("username", usernameDB);
-                    intent.putExtra("password", passwordDB);
-                    intent.putExtra("address", addressDB);
-                    intent.putExtra("symptoms", symptomsDB);
-                    intent.putExtra("recentExposure", recentDB);
-
-                    startActivity(intent);
-                }else{
-
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
+        intentUser(MyQRPage.class);
     }
 
     public void openAccount(View view) {
-        Intent intent = getIntent();
-        String emailCurrent = intent.getStringExtra("username");
-        reference = FirebaseDatabase.getInstance("https://teknoyhealthapp-default-rtdb.asia-southeast1.firebasedatabase.app").getReference("User");
-        Query checkUser = reference.orderByChild("username").equalTo(emailCurrent);
-
-        checkUser.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if(snapshot.exists()){
-                    String namedDB = snapshot.child(emailCurrent).child("fullName").getValue(String.class);
-                    String emailDB = snapshot.child(emailCurrent).child("email").getValue(String.class);
-                    String phoneDB = snapshot.child(emailCurrent).child("phoneNumber").getValue(String.class);
-                    String usernameDB = snapshot.child(emailCurrent).child("username").getValue(String.class);
-                    String passwordDB = snapshot.child(emailCurrent).child("password").getValue(String.class);
-                    String addressDB = snapshot.child(emailCurrent).child("address").getValue(String.class);
-
-                    Intent intent = new Intent(getApplicationContext(), MyAccountPage.class);
-
-                    intent.putExtra("fullName", namedDB);
-                    intent.putExtra("email", emailDB);
-                    intent.putExtra("phoneNumber", phoneDB);
-                    intent.putExtra("username", usernameDB);
-                    intent.putExtra("password", passwordDB);
-                    intent.putExtra("address", addressDB);
-
-                    startActivity(intent);
-                }else{
-
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
+        intentUser(MyAccountPage.class);
     }
 
-    public void openHistory(View view) {
+    public void openUpdate(View view) {
+        intentUser(UpdatePage.class);
+    }
+
+    public void openAbout(View view) {
+        intentUser(AboutPage.class);
+    }
+
+    public void intentUser(Class c){
         Intent intent = getIntent();
         String emailCurrent = intent.getStringExtra("username");
         reference = FirebaseDatabase.getInstance("https://teknoyhealthapp-default-rtdb.asia-southeast1.firebasedatabase.app").getReference("User");
@@ -150,9 +79,10 @@ public class Dashboard extends AppCompatActivity {
                     String addressDB = snapshot.child(emailCurrent).child("address").getValue(String.class);
                     String symptomsDB = snapshot.child(emailCurrent).child("symptoms").getValue(String.class);
                     String recentDB = snapshot.child(emailCurrent).child("recentExposure").getValue(String.class);
+                    String updateDB = snapshot.child(emailCurrent).child("update").getValue(String.class);
 
                     Intent intent;
-                    intent = new Intent(getApplicationContext(), HistoryPage.class);
+                    intent = new Intent(getApplicationContext(), c);
 
                     intent.putExtra("fullName", namedDB);
                     intent.putExtra("email", emailDB);
@@ -162,6 +92,7 @@ public class Dashboard extends AppCompatActivity {
                     intent.putExtra("address", addressDB);
                     intent.putExtra("symptoms", symptomsDB);
                     intent.putExtra("recentExposure", recentDB);
+                    intent.putExtra("update", updateDB);
 
                     startActivity(intent);
                 }else{
@@ -176,8 +107,4 @@ public class Dashboard extends AppCompatActivity {
         });
     }
 
-    public void openAbout(View view) {
-        Intent intent = new Intent(this, AboutPage.class);
-        startActivity(intent);
-    }
 }

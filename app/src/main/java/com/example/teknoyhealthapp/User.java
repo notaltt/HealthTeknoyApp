@@ -3,7 +3,7 @@ package com.example.teknoyhealthapp;
 public class User {
     //variables
     private String fullName, classification, address, email, password,
-            phoneNumber, timeVisit, temperature, username, lastVisit, recentExposure, symptoms;
+            phoneNumber, timeVisit, temperature, username, lastVisit, recentExposure, symptoms, lastBarcodeDate;
     //constructor
     public User() {
     }
@@ -39,6 +39,10 @@ public class User {
         this.phoneNumber = phoneNumber;
         this.username = username;
         this.password = password;
+    }
+
+    public User(String lastBarcodeDate) {
+        this.lastBarcodeDate = lastBarcodeDate;
     }
 
     //getter and setter
@@ -136,5 +140,13 @@ public class User {
 
     public void setSymptoms(String symptoms) {
         this.symptoms = symptoms;
+    }
+
+    public String getLastBarcodeDate() {
+        return lastBarcodeDate;
+    }
+
+    public void setLastBarcodeDate(String lastBarcodeDate) {
+        this.lastBarcodeDate = lastBarcodeDate;
     }
 }
