@@ -61,7 +61,7 @@
                 android:layout_height="wrap_content"
                 android:layout_rowWeight="1"
                 android:layout_columnWeight="1"
-                android:layout_margin="25dp"
+                android:layout_margin="13dp"
                 app:cardCornerRadius="12dp"
                 app:cardElevation="6dp"
                 android:onClick="openCalendar">
@@ -93,7 +93,7 @@
                 android:layout_height="wrap_content"
                 android:layout_rowWeight="1"
                 android:layout_columnWeight="1"
-                android:layout_margin="25dp"
+                android:layout_margin="13dp"
                 app:cardCornerRadius="12dp"
                 app:cardElevation="6dp"
                 android:onClick="openQR">
@@ -125,7 +125,7 @@
                 android:layout_height="wrap_content"
                 android:layout_rowWeight="1"
                 android:layout_columnWeight="1"
-                android:layout_margin="25dp"
+                android:layout_margin="13dp"
                 app:cardCornerRadius="12dp"
                 app:cardElevation="6dp"
                 android:onClick="openAccount">
@@ -157,7 +157,7 @@
                 android:layout_height="wrap_content"
                 android:layout_rowWeight="1"
                 android:layout_columnWeight="1"
-                android:layout_margin="25dp"
+                android:layout_margin="13dp"
                 app:cardCornerRadius="12dp"
                 app:cardElevation="6dp"
                 android:onClick="openUpdate">
@@ -172,13 +172,13 @@
                     <ImageView
                         android:layout_width="65dp"
                         android:layout_height="80dp"
-                        android:src="@drawable/file" />
+                        android:src="@drawable/update" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="12dp"
-                        android:text="History"
+                        android:text="Updates"
                         android:textColor="#6f6f6f"
                         android:textSize="16sp" />
                 </LinearLayout>
@@ -199,7 +199,7 @@
                 android:layout_height="wrap_content"
                 android:layout_rowWeight="1"
                 android:layout_columnWeight="1"
-                android:layout_margin="25dp"
+                android:layout_margin="13dp"
                 app:cardCornerRadius="12dp"
                 app:cardElevation="6dp"
                 android:onClick="openAbout">

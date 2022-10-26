@@ -4,21 +4,23 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg_qr"
+    android:background="@drawable/form_bg"
     tools:context=".MyQR.MyQRPage">
+
+    <include layout="@layout/toolbar_layout"/>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        tools:layout_editor_absoluteX="-183dp"
-        tools:layout_editor_absoluteY="0dp">
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="39dp">
 
         <RelativeLayout
-            android:layout_width="369dp"
-            android:layout_height="602dp"
+            android:layout_width="wrap_content"
+            android:layout_height="551dp"
             android:layout_marginLeft="20dp"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="70dp"
             android:layout_marginRight="20dp"
             android:padding="10dp">
 
@@ -27,7 +29,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
-                android:layout_marginTop="33dp"
+                android:layout_marginTop="15dp"
                 android:text="TRAVEL UPDATE"
                 android:textColor="#632728"
                 android:textSize="18sp"
@@ -39,7 +41,6 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/viewTravel"
                 android:layout_marginLeft="20dp"
-                android:layout_marginTop="10dp"
                 android:layout_marginRight="18dp"
                 android:text="TRAVEL WITHIN THE LAST 2 WEEKS? (OUTSIDE CEBU) (YES OR NO)"
                 android:textColor="#000000"
@@ -47,6 +48,7 @@
                 android:textStyle="bold" />
 
             <EditText
+                style="@android:style/Widget.EditText"
                 android:id="@+id/textYesNo"
                 android:layout_width="65dp"
                 android:layout_height="wrap_content"
@@ -70,6 +72,7 @@
                 android:textStyle="bold" />
 
             <EditText
+                style="@android:style/Widget.EditText"
                 android:id="@+id/textSpecify"
                 android:layout_width="280dp"
                 android:layout_height="wrap_content"
@@ -80,32 +83,10 @@
                 android:inputType="textEmailAddress" />
 
             <TextView
-                android:id="@+id/viewTemperature"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/textSpecify"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="10dp"
-                android:text="TEMPERATURE (CELSIUS)"
-                android:textColor="#000000"
-                android:textSize="14sp"
-                android:textStyle="bold" />
-
-            <EditText
-                android:id="@+id/textTemperature"
-                android:layout_width="150dp"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/viewTemperature"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="5dp"
-                android:background="@drawable/edit2"
-                android:inputType="textEmailAddress" />
-
-            <TextView
                 android:id="@+id/viewSymptoms"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/textTemperature"
+                android:layout_below="@id/textSpecify"
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="15dp"
                 android:text="SYMPTOMS CHECK"
@@ -119,7 +100,6 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/viewSymptoms"
                 android:layout_marginLeft="20dp"
-                android:layout_marginTop="10dp"
                 android:layout_marginRight="12dp"
                 android:text="ARE YOU CURRENTLY EXPERIENCING ANY OF THE FOLLOWING? (PLEASE CHECK)"
                 android:textColor="#000000"
@@ -163,7 +143,6 @@
             android:id="@+id/generateButton"
             android:layout_width="166dp"
             android:layout_height="48dp"
-            android:layout_marginTop="10dp"
             android:layout_below="@id/listview_symptoms"
             android:layout_gravity="center"
             android:background="@drawable/button_background2"

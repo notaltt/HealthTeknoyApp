@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.Toast;
 
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.database.DatabaseReference;
@@ -57,7 +58,7 @@ public class RegistrationForm extends AppCompatActivity {
                 String user = username.getEditText().getText().toString();
 
                 //user object
-                User useR = new User(name, "", "", emaill, pass, number, "", "", user, "", "", "");
+                User useR = new User(name, "", "", emaill, pass, number, "", "", user, "", "", "", "", "","");
 
                 //will register the user in the firebase database
                 reference.child(user).setValue(useR);
@@ -69,6 +70,8 @@ public class RegistrationForm extends AppCompatActivity {
                         finish();
                     }
                 },250);
+
+                Toast.makeText(getApplicationContext(), "Account Registered", Toast.LENGTH_SHORT).show();
             }
         });//end of the method
     }//end of the method

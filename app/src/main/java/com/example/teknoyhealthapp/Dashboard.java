@@ -1,8 +1,10 @@
 package com.example.teknoyhealthapp;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -36,7 +38,8 @@ public class Dashboard extends AppCompatActivity {
         textEmail = findViewById(R.id.textEmail);
 
         Intent intent = getIntent();
-        String emailCurrent = intent.getStringExtra("username");
+        String emailCurrent = intent.getStringExtra("email");
+        String barcodeCurrent = intent.getStringExtra("barcode");
 
         textEmail.setText(emailCurrent);
     }
@@ -46,7 +49,82 @@ public class Dashboard extends AppCompatActivity {
     }
 
     public void openQR(View view) {
-        intentUser(MyQRPage.class);
+        Intent intent = getIntent();
+        String emailCurrent = intent.getStringExtra("username");
+        reference = FirebaseDatabase.getInstance("https://teknoyhealthapp-default-rtdb.asia-southeast1.firebasedatabase.app").getReference("User");
+        Query checkUser = reference.orderByChild("username").equalTo(emailCurrent);
+
+        checkUser.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(snapshot.exists()){
+                    String namedDB = snapshot.child(emailCurrent).child("fullName").getValue(String.class);
+                    String emailDB = snapshot.child(emailCurrent).child("email").getValue(String.class);
+                    String phoneDB = snapshot.child(emailCurrent).child("phoneNumber").getValue(String.class);
+                    String usernameDB = snapshot.child(emailCurrent).child("username").getValue(String.class);
+                    String passwordDB = snapshot.child(emailCurrent).child("password").getValue(String.class);
+                    String addressDB = snapshot.child(emailCurrent).child("address").getValue(String.class);
+                    String symptomsDB = snapshot.child(emailCurrent).child("symptoms").getValue(String.class);
+                    String recentDB = snapshot.child(emailCurrent).child("recentExposure").getValue(String.class);
+                    String updateDB = snapshot.child(emailCurrent).child("update").getValue(String.class);
+                    String barcodeDB = snapshot.child(emailCurrent).child("barcode").getValue(String.class);
+                    String genderDB = snapshot.child(emailCurrent).child("classification").getValue(String.class);
+
+                    Intent intent;
+                    if(barcodeDB.equals("YES")){
+                        intent = new Intent(getApplicationContext(), BarcodePage.class);
+
+                        intent.putExtra("fullName", namedDB);
+                        intent.putExtra("email", emailDB);
+                        intent.putExtra("phoneNumber", phoneDB);
+                        intent.putExtra("username", usernameDB);
+                        intent.putExtra("password", passwordDB);
+                        intent.putExtra("address", addressDB);
+                        intent.putExtra("symptoms", symptomsDB);
+                        intent.putExtra("recentExposure", recentDB);
+                        intent.putExtra("update", updateDB);
+                        intent.putExtra("barcode", barcodeDB);
+                        intent.putExtra("classification", genderDB);
+
+                        startActivity(intent);
+                    }else{
+                        if(namedDB.isEmpty() || emailDB.isEmpty() || addressDB.isEmpty() || phoneDB.isEmpty() || genderDB.isEmpty()){
+                            AlertDialog.Builder builder = new AlertDialog.Builder(Dashboard.this);
+                            builder.setTitle("Fill out all data in the My Account Page")
+                                    .setPositiveButton("Okay", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialogInterface, int i) {
+
+                                        }
+                                    }).show();
+                        }else{
+                            intent = new Intent(getApplicationContext(), MyQRPage.class);
+
+                            intent.putExtra("fullName", namedDB);
+                            intent.putExtra("email", emailDB);
+                            intent.putExtra("phoneNumber", phoneDB);
+                            intent.putExtra("username", usernameDB);
+                            intent.putExtra("password", passwordDB);
+                            intent.putExtra("address", addressDB);
+                            intent.putExtra("symptoms", symptomsDB);
+                            intent.putExtra("recentExposure", recentDB);
+                            intent.putExtra("update", updateDB);
+                            intent.putExtra("barcode", barcodeDB);
+                            intent.putExtra("classification", genderDB);
+
+                            startActivity(intent);
+                        }
+                    }
+                }else{
+
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 
     public void openAccount(View view) {
@@ -80,6 +158,9 @@ public class Dashboard extends AppCompatActivity {
                     String symptomsDB = snapshot.child(emailCurrent).child("symptoms").getValue(String.class);
                     String recentDB = snapshot.child(emailCurrent).child("recentExposure").getValue(String.class);
                     String updateDB = snapshot.child(emailCurrent).child("update").getValue(String.class);
+                    String barcodeDB = snapshot.child(emailCurrent).child("barcode").getValue(String.class);
+                    String genderDB = snapshot.child(emailCurrent).child("classification").getValue(String.class);
+                    String tempDB = snapshot.child(emailCurrent).child("temperature").getValue(String.class);
 
                     Intent intent;
                     intent = new Intent(getApplicationContext(), c);
@@ -93,6 +174,9 @@ public class Dashboard extends AppCompatActivity {
                     intent.putExtra("symptoms", symptomsDB);
                     intent.putExtra("recentExposure", recentDB);
                     intent.putExtra("update", updateDB);
+                    intent.putExtra("barcode", barcodeDB);
+                    intent.putExtra("classification", genderDB);
+                    intent.putExtra("temperature", tempDB);
 
                     startActivity(intent);
                 }else{

@@ -1,9 +1,11 @@
 package com.example.teknoyhealthapp.MyQR;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -13,6 +15,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.teknoyhealthapp.Dashboard;
 import com.example.teknoyhealthapp.R;
 import com.example.teknoyhealthapp.User;
 import com.google.firebase.database.DataSnapshot;
@@ -24,14 +27,17 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
 public class MyQRPage extends AppCompatActivity {
 
-    private EditText textYesNo, textSpecify, textTemperature;
+    private EditText textYesNo, textSpecify;
     private ListView listview_symptoms, listview_exposed;
+    private TextView toolbar_title;
     private AppCompatButton generateButton;
     private ArrayAdapter<String> adapter;
     private ArrayAdapter<String> adapter2;
@@ -44,7 +50,7 @@ public class MyQRPage extends AppCompatActivity {
     private long maxId;
     String[] arraySymptoms = {"FEVER", "COUGH", "SNEEZE", "CHILLS", "COLDS", "DIFFICULTY BREATHING",
             "MUSCLE PAIN", " SORE THROAT", "LOSS OF SENSE OF TASTE/SMELL", "HEADACHE", "NONE"};
-    String[] arrayExposed = {"EXPOSED TO COVID19 POSITIVE", "FAMILY MEMBER/S HAS SYMPTOMS BUT NOT CONFIRMED", "NONE"};
+    String[] arrayExposed = {"EXPOSED TO COVID19 POSITIVE", "FAMILY MEMBER/S HAS SYMPTOMS", "NONE"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,10 +60,12 @@ public class MyQRPage extends AppCompatActivity {
         //hook up xml file
         textYesNo = findViewById(R.id.textYesNo);
         textSpecify = findViewById(R.id.textSpecify);
-        textTemperature = findViewById(R.id.textTemperature);
         listview_symptoms = findViewById(R.id.listview_symptoms);
         listview_exposed = findViewById(R.id.listview_exposed);
         generateButton = findViewById(R.id.generateButton);
+        toolbar_title = findViewById(R.id.toolbar_title);
+
+        toolbar_title.setText("Health Declaration Form");
 
         adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_multiple_choice, arraySymptoms);
         listview_symptoms.setAdapter(adapter);
@@ -66,6 +74,9 @@ public class MyQRPage extends AppCompatActivity {
         listview_exposed.setAdapter(adapter2);
 
         Intent intent = getIntent();
+
+        rootNode = FirebaseDatabase.getInstance("https://teknoyhealthapp-default-rtdb.asia-southeast1.firebasedatabase.app");
+        reference = rootNode.getReference("User");
 
         String usernameCurrent = intent.getStringExtra("username");
         String nameCurrent = intent.getStringExtra("fullName");
@@ -76,44 +87,30 @@ public class MyQRPage extends AppCompatActivity {
         String genderCurrent = intent.getStringExtra("classification");
         String recentCurrent = intent.getStringExtra("recentExposure");
         String symptomsCurrent = intent.getStringExtra("symptoms");
+        String temperatureCurrent = intent.getStringExtra("temperature");
+        String timeCurrent = intent.getStringExtra("timeVisit");
+        String updateCurrent = intent.getStringExtra("update");
 
         generateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if(!validateSpecify() || !validateTextYesNo() || printSelectedSymptoms().isEmpty() || printSelectedRecent().isEmpty()){
+                    Toast.makeText(getApplicationContext(), "FIELDS CANNOT BE EMPTY", Toast.LENGTH_SHORT).show();
+                    return;
+                }
                     if(printSelectedRecent().equals("NONE") && printSelectedSymptoms().equals("NONE")){
-                        rootNode = FirebaseDatabase.getInstance("https://teknoyhealthapp-default-rtdb.asia-southeast1.firebasedatabase.app");
-                        reference = rootNode.getReference("User");
-
                         String travel = textYesNo.getText().toString();
                         String specify = textSpecify.getText().toString();
-                        String temperature = textTemperature.getText().toString();
-                        String recent = printSelectedRecent();
-                        String symptoms = printSelectedSymptoms();
-
-                        if(recent.equals("NONE")){
-                            recent = "YES";
-                        }else {
-                            recent = "NO";
-                        }
-
-                        if(symptoms.equals("NONE")){
-                            symptoms = "YES";
-                        }else{
-                            symptoms = "NO";
-                        }
 
                         if(travel.equals("NO")){
                             specify = "";
                         }else{
                         }
 
-                        User useR = new User(nameCurrent, genderCurrent, addressCurrent, emailCurrent, passwordCurrent, phoneCurrent, "",
-                                temperature, usernameCurrent, specify, recent, symptoms);
+                        User useR = new User(nameCurrent, genderCurrent, addressCurrent, emailCurrent, passwordCurrent, phoneCurrent, timeCurrent,
+                                temperatureCurrent, usernameCurrent, specify, "NO", "NO", "", "YES", updateCurrent);
 
                         reference.child(usernameCurrent).setValue(useR);
-
-                        Random random = new Random();
-                        int randomInt = random.nextInt(1000);
 
                         reference2 = rootNode.getReference("Dates");
 
@@ -121,15 +118,47 @@ public class MyQRPage extends AppCompatActivity {
                         simpleDateFormat = new SimpleDateFormat("EEE, MMMM d, yyyy");
                         currentDate = simpleDateFormat.format(calendar.getTime());
 
-                        String stringChar = String.valueOf(randomInt);
-
                         User user2 = new User(currentDate);
 
                         reference2.child(usernameCurrent).child(currentDate).setValue(user2);
                         makeIntent();
 
                     }else{
-                        Toast.makeText(getApplicationContext(), "SORRY YOU CAN'T GENERATE A BARCODE. PLEASE CONSULT A DOCTOR.", Toast.LENGTH_SHORT).show();
+                        AlertDialog.Builder builder = new AlertDialog.Builder(MyQRPage.this);
+                        builder.setTitle("Sorry you are not allowed" +
+                                "\nto generate a barcode.")
+                                .setMessage("contact admin for assistance")
+                                .setPositiveButton("OKAY", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                                        String travel = textYesNo.getText().toString();
+                                        String specify = textSpecify.getText().toString();
+                                        String exposure, symptoms;
+
+                                        if(travel.equals("NO")){
+                                            specify = "";
+                                        }else{
+                                        }
+
+                                        if(printSelectedRecent().equals("NONE")){
+                                            exposure = "NO";
+                                        }else{
+                                            exposure = "YES";
+                                        }
+
+                                        if(printSelectedSymptoms().equals("NONE")){
+                                            symptoms = "NO";
+                                        }else{
+                                            symptoms = "YES";
+                                        }
+
+                                        User useR = new User(nameCurrent, genderCurrent, addressCurrent, emailCurrent, passwordCurrent, phoneCurrent, "",
+                                                "", usernameCurrent, specify, exposure, symptoms, "", "NO", updateCurrent);
+
+                                        reference.child(usernameCurrent).setValue(useR);
+                                    }
+                                }).show();
                     }
             }
         });
@@ -194,5 +223,38 @@ public class MyQRPage extends AppCompatActivity {
 
             }
         });
+    }
+
+    public boolean validateTextYesNo(){
+        String val = textYesNo.getText().toString();
+
+        if(val.isEmpty()){
+            textYesNo.setError("Field cannot be empty.");
+            return false;
+        }
+        if (val.equals("YES") || val.equals("NO")) {
+            textYesNo.setError(null);
+            return true;
+        }else {
+            textYesNo.setError("Only accepts YES or NO");
+            return false;
+        }
+    }
+
+    public boolean validateSpecify(){
+        String val = textSpecify.getText().toString();
+        String val2 = textYesNo.getText().toString();
+        if(val2.equals("NO")){
+            textSpecify.setError(null);
+            return true;
+        }else{
+            if(val.isEmpty()){
+                textSpecify.setError("Field cannot be empty.");
+                return false;
+            }else{
+                textSpecify.setError(null);
+                return true;
+            }
+        }
     }
 }

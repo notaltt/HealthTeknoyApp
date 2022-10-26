@@ -4,16 +4,32 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg_create"
+    android:background="@drawable/background"
     tools:context=".RegistrationForm">
+
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="631dp"
-        android:layout_marginTop="120dp"
+        android:layout_height="match_parent"
         android:orientation="vertical"
-        android:padding="35dp">
+        android:padding="25dp">
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Create New Account"
+            android:textColor="@color/maroon"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            android:layout_gravity="center"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Sign Up to Continue"
+            android:textColor="@color/maroon"
+            android:textSize="16sp"
+            android:layout_gravity="center"/>
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/regfullName"
@@ -21,7 +37,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="FULL NAME"
-            app:startIconDrawable="@drawable/person">
+            app:startIconDrawable="@drawable/person"
+            android:layout_marginTop="25dp">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
@@ -34,6 +51,7 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="3dp"
             android:hint="PHONE NUMBER"
             app:startIconDrawable="@drawable/phone">
 
@@ -48,6 +66,7 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="3dp"
             android:hint="INSTITUTIONAL EMAIL"
             app:startIconDrawable="@drawable/email">
 
@@ -62,6 +81,7 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="3dp"
             android:hint="USERNAME"
             app:startIconDrawable="@drawable/person">
 
@@ -76,6 +96,7 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="3dp"
             android:hint="PASSWORD"
             app:passwordToggleEnabled="true"
             app:startIconDrawable="@drawable/ic_baseline_lock_24">
@@ -94,7 +115,7 @@
             android:layout_marginTop="20dp"
             android:background="@drawable/button_background"
             android:backgroundTint="@color/white"
-            android:text="CREATE"
+            android:text="SIGN UP"
             android:textAppearance="@style/TextAppearance.AppCompat.Body2"
             android:textColor="#632728"
             android:textSize="15sp"
@@ -109,7 +130,7 @@
             android:fontFamily="sans-serif-light"
             android:text="Already have an account? Login"
             android:textColor="#212121"
-            android:textSize="18sp"
+            android:textSize="16sp"
             android:typeface="sans"
             android:onClick="loginForm"/>
     </LinearLayout>

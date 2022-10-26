@@ -3,12 +3,12 @@ package com.example.teknoyhealthapp;
 public class User {
     //variables
     private String fullName, classification, address, email, password,
-            phoneNumber, timeVisit, temperature, username, lastVisit, recentExposure, symptoms, lastBarcodeDate;
+            phoneNumber, timeVisit, temperature, username, lastVisit, recentExposure, symptoms, lastBarcodeDate, barcode, update;
     //constructor
     public User() {
     }
 
-    public User(String fullName, String classification, String address, String email, String password, String phoneNumber, String timeVisit, String temperature, String username, String lastVisit, String recentExposure, String symptoms) {
+    public User(String fullName, String classification, String address, String email, String password, String phoneNumber, String timeVisit, String temperature, String username, String lastVisit, String recentExposure, String symptoms, String lastBarcodeDate, String barcode, String update) {
         this.fullName = fullName;
         this.classification = classification;
         this.address = address;
@@ -21,6 +21,9 @@ public class User {
         this.lastVisit = lastVisit;
         this.recentExposure = recentExposure;
         this.symptoms = symptoms;
+        this.lastBarcodeDate = lastBarcodeDate;
+        this.barcode = barcode;
+        this.update = update;
     }
 
     public User(String fullName, String email, String password, String phoneNumber, String username) {
@@ -148,5 +151,21 @@ public class User {
 
     public void setLastBarcodeDate(String lastBarcodeDate) {
         this.lastBarcodeDate = lastBarcodeDate;
+    }
+
+    public String getBarcode() {
+        return barcode;
+    }
+
+    public void setBarcode(String barcode) {
+        this.barcode = barcode;
+    }
+
+    public String getUpdate() {
+        return update;
+    }
+
+    public void setUpdate(String update) {
+        this.update = update;
     }
 }

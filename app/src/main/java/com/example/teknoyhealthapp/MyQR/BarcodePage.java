@@ -1,15 +1,22 @@
 package com.example.teknoyhealthapp.MyQR;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.os.Handler;
+import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ImageView;
 
+import com.example.teknoyhealthapp.Dashboard;
+import com.example.teknoyhealthapp.LoginForm;
 import com.example.teknoyhealthapp.R;
+import com.example.teknoyhealthapp.RegistrationForm;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.MultiFormatWriter;
 import com.google.zxing.WriterException;
@@ -27,9 +34,8 @@ public class BarcodePage extends AppCompatActivity {
         barcode = findViewById(R.id.barcode);
 
         Intent intent = getIntent();
-        String usernameCurrent = intent.getStringExtra("username");
+        String name = intent.getStringExtra("username");
 
-        String name = usernameCurrent;
         MultiFormatWriter writer = new MultiFormatWriter();
         try {
             BitMatrix matrix = writer.encode(name, BarcodeFormat.QR_CODE, 850, 850);
@@ -41,5 +47,6 @@ public class BarcodePage extends AppCompatActivity {
         } catch (WriterException e){
             e.printStackTrace();
         }
+
     }
 }

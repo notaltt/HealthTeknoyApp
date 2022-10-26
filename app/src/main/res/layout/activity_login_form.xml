@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@drawable/bg_login_register"
+    android:background="@drawable/bg_login"
     tools:context=".LoginForm">
 
     <LinearLayout
@@ -20,7 +20,7 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="INSTITUTIONAL EMAIL"
+            android:hint="USERNAME"
             app:startIconDrawable="@drawable/email">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -34,6 +34,7 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="3dp"
             android:hint="PASSWORD"
             app:passwordToggleEnabled="true"
             app:startIconDrawable="@drawable/ic_baseline_lock_24">
@@ -67,7 +68,7 @@
             android:layout_gravity="center"
             android:text="Don't have an acccount? Create new account"
             android:textColor="#212121"
-            android:textSize="18sp"
+            android:textSize="16sp"
             android:typeface="sans"
             android:onClick="registerForm"/>
     </LinearLayout>

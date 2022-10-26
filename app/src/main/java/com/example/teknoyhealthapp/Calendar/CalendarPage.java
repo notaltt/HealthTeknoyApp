@@ -30,7 +30,7 @@ import java.util.Calendar;
 
 public class CalendarPage extends AppCompatActivity {
 
-    TextView currentDateText;
+    TextView currentDateText, toolbar_title;
     RecyclerView listView;
     Calendar calendar;
     SimpleDateFormat simpleDateFormat;
@@ -49,6 +49,7 @@ public class CalendarPage extends AppCompatActivity {
 
         currentDateText = findViewById(R.id.currentDateText);
         listView = findViewById(R.id.listview_dates);
+        toolbar_title = findViewById(R.id.toolbar_title);
 
         calendar = Calendar.getInstance();
 
@@ -56,6 +57,7 @@ public class CalendarPage extends AppCompatActivity {
         date = simpleDateFormat.format(calendar.getTime());
         currentDateText.setText(date);
 
+        toolbar_title.setText("QR code History");
 
         Intent intent = getIntent();
         String usernameCurrent = intent.getStringExtra("username");

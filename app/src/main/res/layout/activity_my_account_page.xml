@@ -7,150 +7,133 @@
     android:background="@drawable/bg_account"
     tools:context=".MyAccount.MyAccountPage">
 
-    <TextView
-        android:id="@+id/textUsername"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="27dp"
-        android:layout_marginTop="68dp"
-        android:layout_marginEnd="295dp"
-        android:layout_marginBottom="644dp"
-        android:text="username"
-        android:textColor="@color/maroon"
-        android:textSize="14sp"
+    <include
+        android:id="@+id/include"
+        layout="@layout/toolbar_layout" />
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="597dp"
+        android:layout_marginBottom="68dp"
+        android:gravity="center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toStartOf="parent">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="90dp"
-        android:orientation="vertical"
-        tools:layout_editor_absoluteX="-183dp"
-        tools:layout_editor_absoluteY="0dp">
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="597dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="32dp"
-            android:layout_marginRight="20dp"
-            android:padding="10dp">
+        <TextView
+            android:id="@+id/viewMiddle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="FULL NAME"
+            android:textColor="#632728"
+            android:textSize="15sp"
+            android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/viewMiddle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:text="FULL NAME"
-                android:textColor="#632728"
-                android:textSize="15sp"
-                android:textStyle="bold" />
+        <TextView
+            android:id="@+id/viewEmail2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/textFullName"
+            android:layout_marginTop="10dp"
+            android:text="INSTITUTIONAL EMAIL"
+            android:textColor="#632728"
+            android:textSize="15sp"
+            android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/viewEmail2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/textFullName"
-                android:layout_marginTop="10dp"
-                android:text="INSTITUTIONAL EMAIL"
-                android:textColor="#632728"
-                android:textSize="15sp"
-                android:textStyle="bold" />
+        <TextView
+            android:id="@+id/viewAddress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/textEmail2"
+            android:layout_marginTop="10dp"
+            android:text="ADDRESS"
+            android:textColor="#632728"
+            android:textSize="15sp"
+            android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/viewAddress"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/textEmail2"
-                android:layout_marginTop="10dp"
-                android:text="ADDRESS"
-                android:textColor="#632728"
-                android:textSize="15sp"
-                android:textStyle="bold" />
+        <TextView
+            android:id="@+id/viewPhone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/textAddress"
+            android:layout_marginTop="10dp"
+            android:text="PHONE NUMBER"
+            android:textColor="#632728"
+            android:textSize="15sp"
+            android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/viewPhone"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/textAddress"
-                android:layout_marginTop="10dp"
-                android:text="PHONE NUMBER"
-                android:textColor="#632728"
-                android:textSize="15sp"
-                android:textStyle="bold" />
+        <EditText
+            android:id="@+id/textFullName"
+            android:layout_width="350dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/viewMiddle"
+            android:layout_alignParentStart="true"
+            android:background="@drawable/edit"
+            android:inputType="text" />
 
-            <EditText
-                android:id="@+id/textFullName"
-                android:layout_width="350dp"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/viewMiddle"
-                android:layout_alignParentEnd="true"
-                android:background="@drawable/edit"
-                android:inputType="text" />
+        <EditText
+            android:id="@+id/textEmail2"
+            android:layout_width="350dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/viewEmail2"
+            android:layout_marginEnd="-234dp"
+            android:background="@drawable/edit"
+            android:inputType="textEmailAddress" />
 
-            <EditText
-                android:id="@+id/textEmail2"
-                android:layout_width="350dp"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/viewEmail2"
-                android:layout_marginEnd="-234dp"
-                android:background="@drawable/edit"
-                android:inputType="textEmailAddress" />
+        <EditText
+            android:id="@+id/textAddress"
+            android:layout_width="350dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/viewAddress"
+            android:layout_marginEnd="-234dp"
+            android:background="@drawable/edit"
+            android:inputType="textPostalAddress" />
 
-            <EditText
-                android:id="@+id/textAddress"
-                android:layout_width="350dp"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/viewAddress"
-                android:layout_marginEnd="-234dp"
-                android:background="@drawable/edit"
-                android:inputType="textPostalAddress" />
+        <EditText
+            android:id="@+id/textPhone"
+            android:layout_width="350dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/viewPhone"
+            android:layout_marginEnd="-234dp"
+            android:background="@drawable/edit"
+            android:inputType="phone" />
 
-            <EditText
-                android:id="@+id/textPhone"
-                android:layout_width="350dp"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/viewPhone"
-                android:layout_marginEnd="-234dp"
-                android:background="@drawable/edit"
-                android:inputType="phone" />
+        <TextView
+            android:id="@+id/viewGender"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/textPhone"
+            android:layout_marginTop="10dp"
+            android:text="GENDER"
+            android:textColor="#632728"
+            android:textSize="15sp"
+            android:textStyle="bold" />
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/inputLayout"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:layout_below="@id/textPhone"
-                android:layout_marginTop="25dp"
-                android:layout_marginRight="150dp"
-                android:background="@color/white">
+        <EditText
+            android:id="@+id/textGender"
+            android:layout_width="350dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/viewGender"
+            android:layout_marginEnd="-234dp"
+            android:background="@drawable/edit"
+            android:inputType="text" />
 
-                <AutoCompleteTextView
-                    android:id="@+id/autoComplete"
-                    android:layout_width="195dp"
-                    android:layout_height="wrap_content"
-                    android:inputType="none"
-                    android:text="Gender" />
-            </com.google.android.material.textfield.TextInputLayout>
 
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/updateButton"
-                android:layout_width="102dp"
-                android:layout_height="48dp"
-                android:layout_below="@id/inputLayout"
-                android:layout_marginLeft="235dp"
-                android:layout_marginTop="20dp"
-                android:background="@drawable/button_background2"
-                android:text="UPDATE" />
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/updateButton"
+            android:layout_width="102dp"
+            android:layout_height="48dp"
+            android:layout_below="@id/textGender"
+            android:layout_marginLeft="235dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/button_background2"
+            android:text="UPDATE" />
 
-        </RelativeLayout>
-
-    </LinearLayout>
-
+    </RelativeLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
